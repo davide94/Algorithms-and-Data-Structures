@@ -19,4 +19,4 @@ The time complexity is Θ(n*lg(n)).
 
 ## Summary
 
-![alt tag](https://raw.github.com/davide94/sorting_algorithms_comparison/combinated_chart.png)
+![alt tag](https://raw.githubusercontent.com/davide94/sorting_algorithms_comparison/master/comparison.png)
