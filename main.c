@@ -15,7 +15,7 @@ int main() {
 	FILE *h;
 	h = fopen("result.dat","w");
 
-	for (int len = 10; len <= MAX; len+=10) {
+	for (int len = 10; len <= MAX; len+=20) {
 		
 		int *A = malloc(len*sizeof(int));
 		int *B = malloc(len*sizeof(int));
