@@ -17,6 +17,8 @@ The time complexity is Θ(n*lg(n)).
 
 ### Heap Sort
 
+### Quick Sort
+
 ## Summary
 
 ![alt tag](https://raw.githubusercontent.com/davide94/sorting_algorithms_comparison/master/comparison.png)
