@@ -7,6 +7,7 @@
 #include "insertion_sort.c"
 #include "merge_sort.c"
 #include "heap_sort.c"
+#include "quick_sort.c"
 
 void print_array(int*, int);
 
@@ -20,6 +21,7 @@ int main() {
 		int *A = malloc(len*sizeof(int));
 		int *B = malloc(len*sizeof(int));
 		int *C = malloc(len*sizeof(int));
+		int *D = malloc(len*sizeof(int));
 
 		srand(time(NULL));
 
@@ -28,6 +30,7 @@ int main() {
 			A[i] = value;
 			B[i] = value;
 			C[i] = value;
+			D[i] = value;
 		}
 
 
@@ -35,7 +38,7 @@ int main() {
 		//print_array(A, len);
 
 		clock_t start, end;
-		double cpu_time_insertion_sort, cpu_time_merge_sort, cpu_time_heap_sort;
+		double cpu_time_insertion_sort, cpu_time_merge_sort, cpu_time_heap_sort, cpu_time_quick_sort;
 
 		start = clock();
 		insertion_sort(A, len);
@@ -51,12 +54,17 @@ int main() {
 		heap_sort(C, len);
 		end = clock();
 		cpu_time_heap_sort = ((double) (end - start)) / CLOCKS_PER_SEC;
+		
+		start = clock();
+		quick_sort(D, 0, len-1);
+		end = clock();
+		cpu_time_quick_sort = ((double) (end - start)) / CLOCKS_PER_SEC;
 
 		//printf("\nAfter:\n");
-		//print_array(A, len);
+		//print_array(D, len);
 
-		printf("\nSorted	%i	items in	%f	%f	%f	clock times\n\n", len, cpu_time_insertion_sort, cpu_time_merge_sort, cpu_time_heap_sort);
-		fprintf(h,"%i,%f,%f,%f\n", len, cpu_time_insertion_sort, cpu_time_merge_sort, cpu_time_heap_sort);
+		printf("\nSorted	%i	items in	%f	%f	%f	%f\n\n", len, cpu_time_insertion_sort, cpu_time_merge_sort, cpu_time_heap_sort, cpu_time_quick_sort);
+		fprintf(h,"%i,%f,%f,%f,%f\n", len, cpu_time_insertion_sort, cpu_time_merge_sort, cpu_time_heap_sort, cpu_time_quick_sort);
 
 	}
 
