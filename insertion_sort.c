@@ -14,3 +14,10 @@ void insertion_sort(int A[], int n) {
 		A[j+1] = key;
 	}
 }
+
+void insertion_sort_worst_case(int A[], int len) {
+
+	for (int i = 0; i < len; i++) {
+		A[i] = len - i;
+	}
+}

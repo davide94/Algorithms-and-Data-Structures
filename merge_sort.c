@@ -41,3 +41,12 @@ void merge(int A[], int p, int q, int r) {
 		}
 	}
 }
+
+void merge_sort_worst_case(int A[], int len) {
+
+	srand(time(NULL));
+
+	for (int i=0; i<len; i++) {
+		A[i] = rand();
+	}
+}
