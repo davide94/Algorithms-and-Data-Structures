@@ -6,7 +6,7 @@ Just a simple comparison of the growing of temporal complexity of the most commo
 
 Insertion sort is a sorting algorithm efficient when the input is small, in fact the growth of the computation time is proportional to the square of the input length: T(n)=𝛩(n^2) *where n is the length of the input array*.
 
-![alt tag](https://raw.githubusercontent.com/davide94/sorting_algorithms_comparison/master/charts/insertion_sort.png)
+![alt tag](https://raw.githubusercontent.com/davide94/Corso-API/master/Sorting%20Algorithms/charts/insertion_sort.png)
 
 ### Merge Sort:
 
@@ -35,4 +35,4 @@ The time complexity in the worst case is 𝛩(n^2), but with a linear distribute
 
 ## Summary
 
-![alt tag](https://raw.githubusercontent.com/davide94/sorting_algorithms_comparison/master/charts/comparison.png)
+![alt tag](https://raw.githubusercontent.com/davide94/Corso-API/master/Sorting%20Algorithms/charts/comparison.png)
