@@ -18,6 +18,7 @@ int main() {
 	avg();
 	worst_case();
 	
+	return 0;
 }
 
 void avg() {
