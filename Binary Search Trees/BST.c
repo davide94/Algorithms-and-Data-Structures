@@ -101,13 +101,13 @@ node *tree_predecessor(node *x) {
 	return x;
 }
 
-void tree_insert(node *x, uint32_t v) {
-	//printf("--%i---\n", v);
+void tree_insert(tree *T, uint32_t v) {
+
 	node *y = NULL;
 	
 	while (x != NULL) {	
+
 		y = x;
-		//printf("%i\n", x->key);
 		if (v < x->key)
 			x = x->left;
 		else 
@@ -124,11 +124,36 @@ void tree_insert(node *x, uint32_t v) {
 		y->left = new;
 	else
 		y->right = new;
-	//printf("------\n");
-
 }
 
+void tree_remove(tree *T, node *x) {
 
+	if (x->left == NULL) {
+		if (x->p->left == x)
+			x->p->left = x->right;
+		else
+			x->p->right = x->right;
+	} else if (x->right == NULL) {
+		if (x->p->left == x)
+			x->p->left = x->left;
+		else
+			x->p->right = x->left;
+	} else {
+		node *y = tree_predecessor(x);
+		if (T->root == x)
+			T->root = y;
+		y->p->right = y->left;
+		y->right = x->right;
+		y->left = x->left;		
+		y->p = x->p;
+		if (x->p != NULL) {
+			if (y->p->left == x)
+				y->p->left = y;
+			else
+				y->p->right = y;
+		}
+	}
+}
 
 
 
