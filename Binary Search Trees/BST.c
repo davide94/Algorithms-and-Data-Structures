@@ -103,6 +103,7 @@ node *tree_predecessor(node *x) {
 
 void tree_insert(tree *T, uint32_t v) {
 
+	node *x = T->root;
 	node *y = NULL;
 	
 	while (x != NULL) {	
@@ -120,7 +121,9 @@ void tree_insert(tree *T, uint32_t v) {
 	new->left = NULL;
 	new->right = NULL;
 
-	if (new->key < y->key)
+	if (y == NULL)
+		T->root = new;
+	else if (new->key < y->key)
 		y->left = new;
 	else
 		y->right = new;

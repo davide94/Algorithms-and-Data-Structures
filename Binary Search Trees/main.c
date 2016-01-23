@@ -46,8 +46,8 @@ int main() {
 	//printf("%i\n", h);
 
 	tree_print(T->root);
-	tree_remove(T, tree_search(T->root, 7));
-	tree_print(T->root);
+	//tree_remove(T, tree_search(T->root, 7));
+	//tree_print(T->root);
 
 	//struct node *found = tree_search(T->root, 5);
 	//struct node *found = iterative_tree_search(T->root, 5);
