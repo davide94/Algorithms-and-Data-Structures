@@ -1,38 +1,51 @@
 
-void inorder_tree_walker(node *x) {
+typedef struct BST_node
+{
+	uint32_t key;
+	struct BST_node *p;
+	struct BST_node *left;
+	struct BST_node *right;
+} BST_node;
+
+typedef struct BST
+{
+	struct BST_node *root;	
+} BST;
+
+void BST_inorder_walker(BST_node *x) {
 	
 	if (x != NULL) {
-		inorder_tree_walker(x->left);
+		BST_inorder_walker(x->left);
 		printf("%i\n", x->key);
-		inorder_tree_walker(x->right);
+		BST_inorder_walker(x->right);
 	}
 }
 
-uint32_t tree_height(node *x, uint32_t h) {
+uint32_t BST_height(BST_node *x, uint32_t h) {
 	
 	if (x == NULL)
 		return h-1;
 
-	uint32_t l = tree_height(x->left, h+1);
-	uint32_t r = tree_height(x->right, h+1);
+	uint32_t l = BST_height(x->left, h+1);
+	uint32_t r = BST_height(x->right, h+1);
 
 	if (l < r)
 		return r;
 	return l;
 }
 
-node *tree_search(node *x, uint32_t key) {
+BST_node *BST_search(BST_node *x, uint32_t key) {
 
 	if (x == NULL || x->key == key)
 		return x;
 
 	if (key < x->key)
-		return tree_search(x->left, key);
+		return BST_search(x->left, key);
 
-	return tree_search(x->right, key);
+	return BST_search(x->right, key);
 }
 
-node *iterative_tree_search(node *x, uint32_t key) {
+BST_node *BST_iterative_search(BST_node *x, uint32_t key) {
 
 	while (x != NULL && x->key != key) {
 		if (key < x->key)
@@ -43,14 +56,14 @@ node *iterative_tree_search(node *x, uint32_t key) {
 	return x;
 }
 
-node *tree_maximum(node *x) {
+BST_node *BST_maximum(BST_node *x) {
 	
 	if (x->right == NULL)
 		return x;
-	return tree_maximum(x->right);
+	return BST_maximum(x->right);
 }
 
-node *iterative_tree_maximum(node *x) {
+BST_node *BST_iterative_maximum(BST_node *x) {
 	
 	while (x->right != NULL) {
 		x = x->right;
@@ -58,15 +71,15 @@ node *iterative_tree_maximum(node *x) {
 	return x;
 }
 
-node *tree_minimum(node *x) {
+BST_node *BST_minimum(BST_node *x) {
 	
 	if (x->left == NULL)
 		return x;
-	return tree_minimum(x->left);
+	return BST_minimum(x->left);
 
 }
 
-node *iterative_tree_minimum(node *x) {
+BST_node *BST_iterative_minimum(BST_node *x) {
 	
 	while (x->left != NULL) {
 		x = x->left;
@@ -74,11 +87,11 @@ node *iterative_tree_minimum(node *x) {
 	return x;
 }
 
-node *tree_successor(node *x) {
+BST_node *BST_successor(BST_node *x) {
 	if (x->right != NULL)
-		return tree_minimum(x->right);
+		return BST_minimum(x->right);
 	
-	node *y = x->p;
+	BST_node *y = x->p;
 
 	while (y != NULL && x == y->right) {
 		x = y;
@@ -87,12 +100,12 @@ node *tree_successor(node *x) {
 	return x;
 }
 
-node *tree_predecessor(node *x) {
+BST_node *BST_predecessor(BST_node *x) {
 	
 	if (x->left != NULL)
-		return tree_maximum(x->left);
+		return BST_maximum(x->left);
 	
-	node *y = x->p;
+	BST_node *y = x->p;
 
 	while (y != NULL && x == y->left) {
 		x = y;
@@ -101,10 +114,10 @@ node *tree_predecessor(node *x) {
 	return x;
 }
 
-void tree_insert(tree *T, uint32_t v) {
+void BST_insert(BST *T, uint32_t v) {
 
-	node *x = T->root;
-	node *y = NULL;
+	BST_node *x = T->root;
+	BST_node *y = NULL;
 	
 	while (x != NULL) {	
 
@@ -115,7 +128,7 @@ void tree_insert(tree *T, uint32_t v) {
 			x = x->right;
 	}
 
-	node *new = malloc(sizeof(node));
+	BST_node *new = malloc(sizeof(BST_node));
 	new->key = v;
 	new->p = y;
 	new->left = NULL;
@@ -129,7 +142,7 @@ void tree_insert(tree *T, uint32_t v) {
 		y->right = new;
 }
 
-void tree_remove(tree *T, node *x) {
+void BST_remove(BST *T, BST_node *x) {
 
 	if (x->left == NULL) {
 		if (x->p->left == x)
@@ -142,7 +155,7 @@ void tree_remove(tree *T, node *x) {
 		else
 			x->p->right = x->left;
 	} else {
-		node *y = tree_predecessor(x);
+		BST_node *y = BST_predecessor(x);
 		if (T->root == x)
 			T->root = y;
 		y->p->right = y->left;
@@ -156,6 +169,44 @@ void tree_remove(tree *T, node *x) {
 				y->p->right = y;
 		}
 	}
+}
+
+void BST_left_rotate(BST *T, BST_node *x) {
+
+	BST_node *y = x->right;
+	x->right = y->left;
+
+	if (y->left != NULL)
+		y->left->p = x;
+	y->p = x->p;
+	if(x == T->root)
+		T->root = y;
+	else if (x == x->p->left)
+		x->p->left = y;
+	else
+		x->p->right = y;
+
+	y->left = x;
+	x->p = y;
+}
+
+void BST_right_rotate(BST *T, BST_node *x) {
+
+	BST_node *y = x->left;
+	x->left = y->right;
+
+	if (y->right != NULL)
+		y->right->p = x;
+	y->p = x->p;
+	if(x == T->root)
+		T->root = y;
+	else if (x == x->p->right)
+		x->p->right = y;
+	else
+		x->p->left = y;
+
+	y->right = x;
+	x->p = y;
 }
 
 

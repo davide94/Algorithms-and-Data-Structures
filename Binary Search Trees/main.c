@@ -2,69 +2,95 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-typedef struct node
-{
-	uint32_t key;
-	struct node *p;
-	struct node *left;
-	struct node *right;	
-} node;
-
-typedef struct tree
-{
-	struct node *root;	
-} tree;
-
 #include "BST.c"
+#include "RBT.c"
 #include "tree_print.c"
 
-void tree_init(tree * T) {
+void a_binary_search_tree(BST * T) {
 
-	tree_insert(T, 15);
-	tree_insert(T, 6);
-	tree_insert(T, 18);
-	tree_insert(T, 3);
-	tree_insert(T, 7);
-	tree_insert(T, 17);
-	tree_insert(T, 20);
-	tree_insert(T, 2);
-	tree_insert(T, 4);
-	tree_insert(T, 13);
-	tree_insert(T, 9);
+	T->root = NULL;
 
-	tree_insert(T, 10);
+	BST_insert(T, 15);
+	BST_insert(T, 6);
+	BST_insert(T, 18);
+	BST_insert(T, 3);
+	BST_insert(T, 7);
+	BST_insert(T, 17);
+	BST_insert(T, 20);
+	BST_insert(T, 2);
+	BST_insert(T, 4);
+	BST_insert(T, 13);
+	BST_insert(T, 9);
+	BST_insert(T, 10);
+
+}
+
+void a_red_black_tree(RBT * T) {
+
+	T->nil = malloc(sizeof(RBT_node));
+	T->root = malloc(sizeof(RBT_node));
+	
+	T->root->key = 11;
+	T->root->p = T->nil;
+	T->root->left = T->nil;
+	T->root->right = T->nil;
+	T->root->color = BLACK;
+	
+	T->nil->p = NULL;
+	T->nil->left = NULL;
+	T->nil->right = NULL;
+	T->nil->color = BLACK;
+
+	
+	RBT_insert(T, 2);
+	RBT_insert(T, 14);
+	RBT_insert(T, 1);
+	RBT_insert(T, 7);
+	RBT_insert(T, 15);
+	RBT_insert(T, 5);
+	RBT_insert(T, 8);
 
 }
 
 int main() {
 	
-	tree *T = malloc(sizeof(tree));
-	tree_init(T);
+	//BST *T = malloc(sizeof(BST));
+	//a_binary_search_tree(T);
+	//BST_print(T);
+
+	RBT *T = malloc(sizeof(RBT));
+	a_red_black_tree(T);
+	RBT_print(T);
 	
-	//inorder_tree_walker(T->root);
+	RBT_insert(T, 4);
+	RBT_print(T);
+
+	//BST_inorder_walker(T->root);
 	//uint32_t h = tree_height(T->root, 0);
 	//printf("%i\n", h);
 
-	tree_print(T->root);
-	//tree_remove(T, tree_search(T->root, 7));
-	//tree_print(T->root);
+	//BST_remove(T, BST_search(T->root, 7));
+	//BST_print(T);
 
-	//struct node *found = tree_search(T->root, 5);
-	//struct node *found = iterative_tree_search(T->root, 5);
-	//inorder_tree_walker(found);
+	//BST_right_rotate(T, BST_search(T->root, 6));
+	//BST_print(T);
+
+	//BST_node *found = BST_search(T->root, 5);
+	//BST_node *found = BST_iterative_search(T->root, 5);
+	//BST_inorder_walker(found);
 	
-	//node *m = tree_maximum(T->root);
-	//node *m = iterative_tree_maximum(T->root);
-	//node *m = tree_minimum(T->root);
-	//node *m = iterative_tree_minimum(T->root);
+	//BST_node *m = BST_maximum(T->root);
+	//BST_node *m = BST_iterative_maximum(T->root);
+	//BST_node *m = BST_minimum(T->root);
+	//BST_node *m = BST_iterative_minimum(T->root);
 	//if (m!=NULL) printf("%i\n", m->key);
 	//else printf("NULL\n");
 	
-	//node *n = tree_successor(T->root->left->right);
+	//BST_node *n = BST_successor(T->root->left->right);
 	//if (n!=NULL) printf("%i\n", n->key);
 	//else printf("NULL\n");
 	
-	//node *p = tree_predecessor(T->root->left->left);
+	//BST_node *p = BST_predecessor(T->root->left->left);
 	//if (p!=NULL) printf("%i\n", p->key);
 	//else printf("NULL\n");
 
