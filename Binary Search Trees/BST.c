@@ -21,32 +21,41 @@ void BST_inorder_walker(BST_node *x) {
 	}
 }
 
-uint32_t BST_height(BST_node *x, uint32_t h) {
+uint32_t _BST_height(BST_node *x, uint32_t h) {
 	
 	if (x == NULL)
 		return h-1;
 
-	uint32_t l = BST_height(x->left, h+1);
-	uint32_t r = BST_height(x->right, h+1);
+	uint32_t l = _BST_height(x->left, h+1);
+	uint32_t r = _BST_height(x->right, h+1);
 
 	if (l < r)
 		return r;
 	return l;
 }
 
-BST_node *BST_search(BST_node *x, uint32_t key) {
+uint32_t BST_height(BST *T) {
+	return _BST_height(T->root, 0);
+}
+
+BST_node *_BST_search(BST_node *x, uint32_t key) {
 
 	if (x == NULL || x->key == key)
 		return x;
 
 	if (key < x->key)
-		return BST_search(x->left, key);
+		return _BST_search(x->left, key);
 
-	return BST_search(x->right, key);
+	return _BST_search(x->right, key);
 }
 
-BST_node *BST_iterative_search(BST_node *x, uint32_t key) {
+BST_node *BST_search(BST *T, uint32_t key) {
+	return _BST_search(T->root, key);
+}
 
+BST_node *BST_iterative_search(BST *T, uint32_t key) {
+
+	BST_node *x = T->root;
 	while (x != NULL && x->key != key) {
 		if (key < x->key)
 			x = x->left;
@@ -56,31 +65,41 @@ BST_node *BST_iterative_search(BST_node *x, uint32_t key) {
 	return x;
 }
 
-BST_node *BST_maximum(BST_node *x) {
+BST_node *_BST_maximum(BST_node *x) {
 	
 	if (x->right == NULL)
 		return x;
-	return BST_maximum(x->right);
+	return _BST_maximum(x->right);
 }
 
-BST_node *BST_iterative_maximum(BST_node *x) {
+BST_node *BST_maximum(BST *T) {
+	return _BST_maximum(T->root);
+}
+
+BST_node *BST_iterative_maximum(BST *T) {
 	
+	BST_node *x = T->root;
 	while (x->right != NULL) {
 		x = x->right;
 	}
 	return x;
 }
 
-BST_node *BST_minimum(BST_node *x) {
+BST_node *_BST_minimum(BST_node *x) {
 	
 	if (x->left == NULL)
 		return x;
-	return BST_minimum(x->left);
+	return _BST_minimum(x->left);
 
 }
 
-BST_node *BST_iterative_minimum(BST_node *x) {
+BST_node *BST_minimum(BST *T) {
+	return _BST_minimum(T->root);
+}
+
+BST_node *BST_iterative_minimum(BST *T) {
 	
+	BST_node *x = T->root;
 	while (x->left != NULL) {
 		x = x->left;
 	}
@@ -88,8 +107,9 @@ BST_node *BST_iterative_minimum(BST_node *x) {
 }
 
 BST_node *BST_successor(BST_node *x) {
+
 	if (x->right != NULL)
-		return BST_minimum(x->right);
+		return _BST_minimum(x->right);
 	
 	BST_node *y = x->p;
 
@@ -103,7 +123,7 @@ BST_node *BST_successor(BST_node *x) {
 BST_node *BST_predecessor(BST_node *x) {
 	
 	if (x->left != NULL)
-		return BST_maximum(x->left);
+		return _BST_maximum(x->left);
 	
 	BST_node *y = x->p;
 

@@ -56,36 +56,48 @@ int main() {
 	
 	BST *T = malloc(sizeof(BST));
 	a_binary_search_tree(T);
+	printf("This is a binary search tree:\n");
 	BST_print(T);
 
+	printf("BST_inorder_walker(BST_node *) prints the nodes' keys in crescent order:\n");
 	BST_inorder_walker(T->root);
-	uint32_t h = tree_height(T->root, 0);
+	
+	printf("\nBST_height(BST *) returns the height of the tree:\n");
+	uint32_t h = BST_height(T);
 	printf("%i\n", h);
 
-	BST_remove(T, BST_search(T->root, 7));
+	printf("\nBST_maximum(BST *), BST_iterative_maximum(BST *)/BST_minimum(BST *), BST_iterative_minimum(BST *) returns tht node with the smaller/bigger key in the tree:\n");
+	BST_node *M = BST_maximum(T);
+	BST_node *M_i = BST_iterative_maximum(T);
+	BST_node *m = BST_minimum(T);
+	BST_node *m_i = BST_iterative_minimum(T);
+	printf("%i, %i/%i, %i\nWARNING: if the tree is empty the returned value is NULL.\n\n", M->key, M_i->key, m->key, m_i->key);
+	
+	printf("BST_successor(BST_node *)/BST_predecessor(BST_node *) returns the node's successor/predecessor:\n");
+	BST_node *n = BST_successor(T->root);
+	printf("The key of the root's successor node is: %i\n", n->key);
+	BST_node *p = BST_predecessor(T->root);
+	printf("The key of the root's predecessor node is: %i\n", p->key);
+	printf("WARNING: if the tree is empty the returned value is NULL.\n");
+
+	printf("\nBST_search(BST *, uint32_t) and BST_iterative_search(BST *, uint32_t) returns the tree's node wit the wanted key.\n");
+	BST_node *found = BST_search(T, 5);
+	BST_node *found_i = BST_iterative_search(T, 5);
+
+	printf("\nBST_remove(BST *, BST_node *) removes a node from the tree.\nThis is the previous tree after removing the node with key = 7:\n");
+	BST_remove(T, BST_search(T, 7));
+	BST_print(T);
+	
+	printf("BST_insert(BST *, BST_node *) inserts a node with the desired key in the propper position.\nThis is the previous tree after adding a node with key = 8:\n");
+	BST_insert(T, 8);
 	BST_print(T);
 
-	BST_right_rotate(T, BST_search(T->root, 6));
+	printf("BST_right_rotate(BST *, BST_node *)/BST_left_rotate(BST *, BST_node *) makes a right/left rotation on a node.\nThis is the previous tree after a right rotation on the node with key = 6:\n");
+	BST_right_rotate(T, BST_search(T, 6));
 	BST_print(T);
-
-	BST_node *found = BST_search(T->root, 5);
-	BST_node *found = BST_iterative_search(T->root, 5);
-	BST_inorder_walker(found);
+	printf("And this is the previous tree after a left rotation on the node with key = 3:\n\n\n");
+	BST_left_rotate(T, BST_search(T, 3));
+	BST_print(T);
 	
-	BST_node *m = BST_maximum(T->root);
-	BST_node *m = BST_iterative_maximum(T->root);
-	BST_node *m = BST_minimum(T->root);
-	BST_node *m = BST_iterative_minimum(T->root);
-	if (m!=NULL) printf("%i\n", m->key);
-	else printf("NULL\n");
-	
-	BST_node *n = BST_successor(T->root->left->right);
-	if (n!=NULL) printf("%i\n", n->key);
-	else printf("NULL\n");
-	
-	BST_node *p = BST_predecessor(T->root->left->left);
-	if (p!=NULL) printf("%i\n", p->key);
-	else printf("NULL\n");
-
 	return 0;
 }
