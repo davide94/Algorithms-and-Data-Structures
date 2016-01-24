@@ -134,6 +134,43 @@ BST_node *BST_predecessor(BST_node *x) {
 	return x;
 }
 
+void BST_left_rotate(BST *T, BST_node *x) {
+
+	BST_node *y = x->right;
+	x->right = y->left;
+
+	if (y->left != NULL)
+		y->left->p = x;
+	y->p = x->p;
+	if(x == T->root)
+		T->root = y;
+	else if (x == x->p->left)
+		x->p->left = y;
+	else
+		x->p->right = y;
+
+	y->left = x;
+	x->p = y;
+}
+
+void BST_right_rotate(BST *T, BST_node *x) {
+
+	BST_node *y = x->left;
+	x->left = y->right;
+
+	if (y->right != NULL)
+		y->right->p = x;
+	y->p = x->p;
+	if(x == T->root)
+		T->root = y;
+	else if (x == x->p->right)
+		x->p->right = y;
+	else
+		x->p->left = y;
+
+	y->right = x;
+	x->p = y;
+}
 void BST_insert(BST *T, uint32_t v) {
 
 	BST_node *x = T->root;
@@ -191,43 +228,7 @@ void BST_remove(BST *T, BST_node *x) {
 	}
 }
 
-void BST_left_rotate(BST *T, BST_node *x) {
 
-	BST_node *y = x->right;
-	x->right = y->left;
-
-	if (y->left != NULL)
-		y->left->p = x;
-	y->p = x->p;
-	if(x == T->root)
-		T->root = y;
-	else if (x == x->p->left)
-		x->p->left = y;
-	else
-		x->p->right = y;
-
-	y->left = x;
-	x->p = y;
-}
-
-void BST_right_rotate(BST *T, BST_node *x) {
-
-	BST_node *y = x->left;
-	x->left = y->right;
-
-	if (y->right != NULL)
-		y->right->p = x;
-	y->p = x->p;
-	if(x == T->root)
-		T->root = y;
-	else if (x == x->p->right)
-		x->p->right = y;
-	else
-		x->p->left = y;
-
-	y->right = x;
-	x->p = y;
-}
 
 
 

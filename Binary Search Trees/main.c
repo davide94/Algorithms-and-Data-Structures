@@ -48,7 +48,6 @@ void a_red_black_tree(RBT * T) {
 	RBT_insert(T, 7);
 	RBT_insert(T, 15);
 	RBT_insert(T, 5);
-	RBT_insert(T, 8);
 
 }
 
@@ -84,25 +83,40 @@ void BST_example() {
 	BST_node *found = BST_search(T, 5);
 	BST_node *found_i = BST_iterative_search(T, 5);
 
-	printf("\nBST_remove(BST *, BST_node *) removes a node from the tree.\nThis is the previous tree after removing the node with key = 7:\n");
-	BST_remove(T, BST_search(T, 7));
-	BST_print(T);
-	
-	printf("BST_insert(BST *, BST_node *) inserts a node with the desired key in the propper position.\nThis is the previous tree after adding a node with key = 8:\n");
-	BST_insert(T, 8);
-	BST_print(T);
-
 	printf("BST_right_rotate(BST *, BST_node *)/BST_left_rotate(BST *, BST_node *) makes a right/left rotation on a node.\nThis is the previous tree after a right rotation on the node with key = 6:\n");
 	BST_right_rotate(T, BST_search(T, 6));
 	BST_print(T);
-	printf("And this is the previous tree after a left rotation on the node with key = 3:\n\n\n");
+	printf("And this is the previous tree after a left rotation on the node with key = 3:\n");
 	BST_left_rotate(T, BST_search(T, 3));
 	BST_print(T);
+
+	printf("BST_insert(BST *, uint32_t) inserts a node with the desired key in the propper position.\nThis is the previous tree after adding a node with key = 8:\n");
+	BST_insert(T, 8);
+	BST_print(T);
+
+	printf("BST_remove(BST *, BST_node *) removes a node from the tree.\nThis is the previous tree after removing the node with key = 7:\n");
+	BST_remove(T, BST_search(T, 7));
+	BST_print(T);
+
+}
+
+void RBT_example() {
+	
+	RBT *T = malloc(sizeof(RBT));
+	a_red_black_tree(T);
+	printf("This is a red-black tree:\n");
+	RBT_print(T);
+
+	printf("RBT_insert(RBT *, RBT_node *) inserts a node with the desired key in the propper position.\nThis is the previous rb tree after adding a node with key = 8:\n");
+	RBT_insert(T, 8);
+	RBT_print(T);
+
 }
 
 int main() {
 	
 	BST_example();
+	RBT_example();
 	
 	return 0;
 }
