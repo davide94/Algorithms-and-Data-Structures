@@ -54,45 +54,38 @@ void a_red_black_tree(RBT * T) {
 
 int main() {
 	
-	//BST *T = malloc(sizeof(BST));
-	//a_binary_search_tree(T);
-	//BST_print(T);
+	BST *T = malloc(sizeof(BST));
+	a_binary_search_tree(T);
+	BST_print(T);
 
-	RBT *T = malloc(sizeof(RBT));
-	a_red_black_tree(T);
-	RBT_print(T);
+	BST_inorder_walker(T->root);
+	uint32_t h = tree_height(T->root, 0);
+	printf("%i\n", h);
+
+	BST_remove(T, BST_search(T->root, 7));
+	BST_print(T);
+
+	BST_right_rotate(T, BST_search(T->root, 6));
+	BST_print(T);
+
+	BST_node *found = BST_search(T->root, 5);
+	BST_node *found = BST_iterative_search(T->root, 5);
+	BST_inorder_walker(found);
 	
-	RBT_insert(T, 4);
-	RBT_print(T);
-
-	//BST_inorder_walker(T->root);
-	//uint32_t h = tree_height(T->root, 0);
-	//printf("%i\n", h);
-
-	//BST_remove(T, BST_search(T->root, 7));
-	//BST_print(T);
-
-	//BST_right_rotate(T, BST_search(T->root, 6));
-	//BST_print(T);
-
-	//BST_node *found = BST_search(T->root, 5);
-	//BST_node *found = BST_iterative_search(T->root, 5);
-	//BST_inorder_walker(found);
+	BST_node *m = BST_maximum(T->root);
+	BST_node *m = BST_iterative_maximum(T->root);
+	BST_node *m = BST_minimum(T->root);
+	BST_node *m = BST_iterative_minimum(T->root);
+	if (m!=NULL) printf("%i\n", m->key);
+	else printf("NULL\n");
 	
-	//BST_node *m = BST_maximum(T->root);
-	//BST_node *m = BST_iterative_maximum(T->root);
-	//BST_node *m = BST_minimum(T->root);
-	//BST_node *m = BST_iterative_minimum(T->root);
-	//if (m!=NULL) printf("%i\n", m->key);
-	//else printf("NULL\n");
+	BST_node *n = BST_successor(T->root->left->right);
+	if (n!=NULL) printf("%i\n", n->key);
+	else printf("NULL\n");
 	
-	//BST_node *n = BST_successor(T->root->left->right);
-	//if (n!=NULL) printf("%i\n", n->key);
-	//else printf("NULL\n");
-	
-	//BST_node *p = BST_predecessor(T->root->left->left);
-	//if (p!=NULL) printf("%i\n", p->key);
-	//else printf("NULL\n");
+	BST_node *p = BST_predecessor(T->root->left->left);
+	if (p!=NULL) printf("%i\n", p->key);
+	else printf("NULL\n");
 
 	return 0;
 }
