@@ -52,7 +52,7 @@ void a_red_black_tree(RBT * T) {
 
 }
 
-int main() {
+void BST_example() {
 	
 	BST *T = malloc(sizeof(BST));
 	a_binary_search_tree(T);
@@ -98,6 +98,11 @@ int main() {
 	printf("And this is the previous tree after a left rotation on the node with key = 3:\n\n\n");
 	BST_left_rotate(T, BST_search(T, 3));
 	BST_print(T);
+}
+
+int main() {
+	
+	BST_example();
 	
 	return 0;
 }
