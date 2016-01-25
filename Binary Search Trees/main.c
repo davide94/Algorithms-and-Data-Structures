@@ -107,15 +107,15 @@ void RBT_example() {
 	printf("This is a red-black tree:\n");
 	RBT_print(T);
 
-	printf("RBT_insert(RBT *, RBT_node *) inserts a node with the desired key in the propper position.\nThis is the previous rb tree after adding a node with key = 8:\n");
-	RBT_insert(T, 8);
+	printf("RBT_insert(RBT *, RBT_node *) inserts a node with the desired key in the propper position.\nThis is the previous rb tree after adding a node with key = 4:\n");
+	RBT_insert(T, 3);
 	RBT_print(T);
 
 }
 
 int main() {
 	
-	BST_example();
+	//BST_example();
 	RBT_example();
 	
 	return 0;

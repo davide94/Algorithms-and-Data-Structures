@@ -54,28 +54,34 @@ void RBT_right_rotate(RBT *T, RBT_node *x) {
 
 void RBT_insert_fixup(RBT *T, RBT_node *x) {
 	while (x->p->color == RED) {
-		if (x->p == x->p->p->left) {
+		if (x->p == x->p->p->left) {			//	x->p è figlio sinistro
 			RBT_node *y = x->p->p->right;
-			if (y->color == RED) {
+			if (y->color == RED) {				//	zio è rosso 
 				x->p->color = BLACK;
 				y->color = BLACK;
 				x->p->p->color = RED;
-			} else if (x == x->p->right) {
-				x = x->p;
-				RBT_left_rotate(T, x);
+				x = x->p->p;
+			} else {
+				if (x == x->p->right) {			//	zio nero e x figlio destro
+					x = x->p;
+					RBT_left_rotate(T, x);
+				}								//	zio nero e x figlio sinistro
 				x->p->color = BLACK;
 				x->p->p->color = RED;
 				RBT_right_rotate(T, x->p->p);
 			}
-		} else {
+		} else {								//	x->p è figlio destro
 			RBT_node *y = x->p->p->left;
 			if (y->color == RED) {
 				x->p->color = BLACK;
 				y->color = BLACK;
 				x->p->p->color = RED;
-			} else if (x == x->p->left) {
-				x = x->p;
-				RBT_right_rotate(T, x);
+				x = x->p->p;
+			} else {
+				if (x == x->p->left) {
+					x = x->p;
+					RBT_right_rotate(T, x);
+				}
 				x->p->color = BLACK;
 				x->p->p->color = RED;
 				RBT_left_rotate(T, x->p->p);
