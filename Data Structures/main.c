@@ -65,7 +65,7 @@ void BST_example() {
 	BST_inorder_walker(T->root);
 	
 	printf("\nBST_height(BST *) returns the height of the tree:\n");
-	uint32_t h = BST_height(T);
+	int32_t h = BST_height(T);
 	printf("%i\n", h);
 
 	printf("\nBST_maximum(BST *), BST_iterative_maximum(BST *)/BST_minimum(BST *), BST_iterative_minimum(BST *) returns tht node with the smaller/bigger key in the tree:\n");
@@ -82,7 +82,7 @@ void BST_example() {
 	printf("The key of the root's predecessor node is: %i\n", p->key);
 	printf("WARNING: if the tree is empty the returned value is NULL.\n");
 
-	printf("\nBST_search(BST *, uint32_t) and BST_iterative_search(BST *, uint32_t) returns the tree's node wit the wanted key.\n");
+	printf("\nBST_search(BST *, int32_t) and BST_iterative_search(BST *, int32_t) returns the tree's node wit the wanted key.\n");
 	BST_node *found = BST_search(T, 5);
 	BST_node *found_i = BST_iterative_search(T, 5);
 
@@ -93,7 +93,7 @@ void BST_example() {
 	BST_left_rotate(T, BST_search(T, 3));
 	BST_print(T);
 
-	printf("BST_insert(BST *, uint32_t) inserts a node with the desired key in the propper position.\nThis is the previous tree after adding a node with key = 8:\n");
+	printf("BST_insert(BST *, int32_t) inserts a node with the desired key in the propper position.\nThis is the previous tree after adding a node with key = 8:\n");
 	BST_insert(T, 8);
 	BST_print(T);
 

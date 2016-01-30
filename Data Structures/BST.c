@@ -1,7 +1,7 @@
 
 typedef struct BST_node
 {
-	uint32_t key;
+	int32_t key;
 	struct BST_node *p;
 	struct BST_node *left;
 	struct BST_node *right;
@@ -21,24 +21,24 @@ void BST_inorder_walker(BST_node *x) {
 	}
 }
 
-uint32_t _BST_height(BST_node *x, uint32_t h) {
+int32_t _BST_height(BST_node *x, int32_t h) {
 	
 	if (x == NULL)
 		return h-1;
 
-	uint32_t l = _BST_height(x->left, h+1);
-	uint32_t r = _BST_height(x->right, h+1);
+	int32_t l = _BST_height(x->left, h+1);
+	int32_t r = _BST_height(x->right, h+1);
 
 	if (l < r)
 		return r;
 	return l;
 }
 
-uint32_t BST_height(BST *T) {
+int32_t BST_height(BST *T) {
 	return _BST_height(T->root, 0);
 }
 
-BST_node *_BST_search(BST_node *x, uint32_t key) {
+BST_node *_BST_search(BST_node *x, int32_t key) {
 
 	if (x == NULL || x->key == key)
 		return x;
@@ -49,11 +49,11 @@ BST_node *_BST_search(BST_node *x, uint32_t key) {
 	return _BST_search(x->right, key);
 }
 
-BST_node *BST_search(BST *T, uint32_t key) {
+BST_node *BST_search(BST *T, int32_t key) {
 	return _BST_search(T->root, key);
 }
 
-BST_node *BST_iterative_search(BST *T, uint32_t key) {
+BST_node *BST_iterative_search(BST *T, int32_t key) {
 
 	BST_node *x = T->root;
 	while (x != NULL && x->key != key) {
@@ -171,7 +171,7 @@ void BST_right_rotate(BST *T, BST_node *x) {
 	y->right = x;
 	x->p = y;
 }
-void BST_insert(BST *T, uint32_t v) {
+void BST_insert(BST *T, int32_t v) {
 
 	BST_node *x = T->root;
 	BST_node *y = NULL;

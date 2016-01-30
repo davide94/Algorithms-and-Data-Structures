@@ -1,7 +1,7 @@
 
 typedef struct RBT_node
 {
-	uint32_t key;
+	int32_t key;
 	struct RBT_node *p;
 	struct RBT_node *left;
 	struct RBT_node *right;
@@ -91,7 +91,7 @@ void RBT_insert_fixup(RBT *T, RBT_node *x) {
 	T->root->color = BLACK;
 }
 
-void RBT_insert(RBT *T, uint32_t v) {
+void RBT_insert(RBT *T, int32_t v) {
 
 	RBT_node *x = T->root;
 	RBT_node *y = T->nil;
