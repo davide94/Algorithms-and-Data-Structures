@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include "list.c"
+#include "stack.c"
+#include "queue.c"
 #include "BST.c"
 #include "RBT.c"
 #include "tree_print.c"
@@ -116,7 +119,7 @@ void RBT_example() {
 int main() {
 	
 	//BST_example();
-	RBT_example();
-	
+	//RBT_example();
+
 	return 0;
 }

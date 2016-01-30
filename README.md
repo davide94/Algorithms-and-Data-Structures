@@ -6,6 +6,6 @@ Some algorithms and data structures from "Algoritmi e principi dell'informatica"
 
 Just a simple comparison of the growing of temporal complexity of the most commons sorting algorithms at the growing of input size.
 
-### Binary Search Trees:
+### Data Structures:
 
-An implementation of the primary functions on a binary search trees and red-black trees.
+An implementation of the main functions of some data structures: **lists**, **queues**, **stacks**, **binary search trees** (**BST**) and **red-black trees** (**RBT**).
