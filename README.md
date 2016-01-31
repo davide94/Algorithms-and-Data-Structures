@@ -9,3 +9,7 @@ Just a simple comparison of the growing of temporal complexity of the most commo
 ### Data Structures:
 
 An implementation of the main functions of some data structures: **lists**, **queues**, **stacks**, **binary search trees** (**BST**) and **red-black trees** (**RBT**).
+
+### Graphs:
+
+**Breadth-first search** (**BFS**) and **Depth-first search** (**DFS**) graph exploration.
