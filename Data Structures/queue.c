@@ -30,7 +30,7 @@ void _enqueue(queue *Q, queue_node *node) {
 
 }
 
-void enqueue(queue *Q, int64_t key) {
+void enqueue(queue *Q, int32_t key) {
 
 	queue_node *new = malloc(sizeof(queue_node));
 	new->key = key;
